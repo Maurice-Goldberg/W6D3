@@ -16,16 +16,17 @@ class UsersController < ApplicationController
 
     def update
         user = User.find_by_id(params[:id])
-        user.update(user_params)
-
-        render json: user
+        
+        if user.update(user_params)
+            render json: user
+        else
+            render json: user.errors.full_messages, status: 422
+        end
     end
 
     def destroy
-        User.find_by_id(params[:id]).destroy
-
-        users = User.all
-        render json: users
+        user = User.find_by_id(params[:id]).destroy
+        render json: user
     end
 
     def show
@@ -37,6 +38,7 @@ class UsersController < ApplicationController
         end
     end
 
+    private
     def user_params
         params.require(:user).permit(:username)
     end
