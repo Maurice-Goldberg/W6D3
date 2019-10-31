@@ -1,7 +1,22 @@
 class ArtworksController < ApplicationController
+  # def index
+  #   artworks = Artwork.all
+  #   render json: artworks
+  # end
+
   def index
-    artworks = Artwork.all
-    render json: artworks
+    user = User.find_by_id(params[:user_id])
+    
+    if user
+      owned_artworks = Artwork.where(artist_id: user.id)
+      shared_artworks = user.shared_artworks
+
+      total_artworks = {owned: owned_artworks, shared: shared_artworks}
+
+      render json: total_artworks
+    else
+      render json: "User not found.", status: 404
+    end
   end
 
   def create
