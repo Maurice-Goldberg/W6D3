@@ -28,4 +28,6 @@ class Artwork < ApplicationRecord
         through: :artwork_shares,
         source: :viewer
 
+    has_many :comments,
+        dependent: :destroy
 end

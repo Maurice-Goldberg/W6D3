@@ -1,7 +1,13 @@
 class UsersController < ApplicationController
     def index
-        users = User.all
-        render json: users
+        name = params[:query]
+        if name
+            users = User.where("username ILIKE '%#{name}%'")
+            render json: users
+        else
+            users = User.all
+            render json: users
+        end
     end
 
     def create

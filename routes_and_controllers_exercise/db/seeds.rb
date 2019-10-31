@@ -23,3 +23,7 @@ image_url: "https://media.gq.com/photos/5d8a4896b3830800083f64d1/3:2/w_1386,h_92
 artwork_share1 = ArtworkShare.create!(artwork_id: artwork1.id, viewer_id: user3.id)
 artwork_share2 = ArtworkShare.create!(artwork_id: artwork2.id, viewer_id: user3.id)
 artwork_share3 = ArtworkShare.create!(artwork_id: artwork2.id, viewer_id: user4.id)
+
+comment1 = Comment.create!(body: "This art is incredible.", user_id: user1.id, artwork_id: artwork1.id)
+comment2 = Comment.create!(body: "This art is horrible.", user_id: user2.id, artwork_id: artwork2.id)
+comment3 = Comment.create!(body: "This art is so-so.", user_id: user3.id, artwork_id: artwork2.id)
